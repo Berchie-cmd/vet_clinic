@@ -77,7 +77,7 @@ MinHeap    heap    = { .size = 0 };
 LinkedList history = { .head = NULL, .count = 0 };
 Stack      undoStk = { .top  = -1  };
 BSTNode   *bstRoot = NULL;
-int        nextId  = 1;   /* auto-increment patient ID */
+int        nextId  = 1;   // auto-increment patient ID
 
 
 /* ============================================================
@@ -503,8 +503,8 @@ void displayQueue(int sortMode) {
     printf("\n  Sorted by: %s\n", labels[sortMode]);
     printf("  %-4s %-5s %-20s %-15s %-10s %-10s %-9s %-6s %-5s\n",
            "Rank", "ID", "Owner", "Pet", "Type",
-           "Severity", "ApptTime", "Wait", "Score");
-    printDivider('-', 90);
+           "Severity", "ApptTime", "Wait", "Priority");
+    printDivider('-', 100);
 
     for (int i = 0; i < heap.size; i++) {
         Patient *p = &copy[i];
@@ -567,15 +567,15 @@ void addPatient() {
     p.ownerName[strcspn(p.ownerName, "\n")] = '\0';
     if (strlen(p.ownerName) == 0) strncpy(p.ownerName, "Unknown", NAME_LEN);
 
-    printf("  Pet Name   : ");
-    fgets(p.petName, NAME_LEN, stdin);
-    p.petName[strcspn(p.petName, "\n")] = '\0';
-    if (strlen(p.petName) == 0) strncpy(p.petName, "Unknown", NAME_LEN);
-
     printf("  Pet Type   : ");
     fgets(p.petType, NAME_LEN, stdin);
     p.petType[strcspn(p.petType, "\n")] = '\0';
     if (strlen(p.petType) == 0) strncpy(p.petType, "Unknown", NAME_LEN);
+
+    printf("  Pet Name   : ");
+    fgets(p.petName, NAME_LEN, stdin);
+    p.petName[strcspn(p.petName, "\n")] = '\0';
+    if (strlen(p.petName) == 0) strncpy(p.petName, "Unknown", NAME_LEN);
 
     p.severity        = getSeverity();
     p.appointmentTime = getAppointmentTime();
